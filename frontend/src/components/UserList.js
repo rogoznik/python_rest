@@ -7,10 +7,10 @@ function UserListItem(props) {
                 {props.user.username}
             </td>
             <td>
-                {props.user.firstname}
+                {props.user.firstName}
             </td>
             <td>
-                {props.user.lastname}
+                {props.user.lastName}
             </td>
             <td>
                 {props.user.email}
