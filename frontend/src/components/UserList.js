@@ -1,0 +1,48 @@
+import React from 'react';
+
+function UserListItem(props) {
+    return (
+        <tr>
+            <td>
+                {props.user.username}
+            </td>
+            <td>
+                {props.user.firstname}
+            </td>
+            <td>
+                {props.user.lastname}
+            </td>
+            <td>
+                {props.user.email}
+            </td>
+        </tr>
+    );
+}
+
+function UserList(props) {
+    return (
+        <table>
+            <thead>
+            <tr>
+                <th>
+                    username
+                </th>
+                <th>
+                    firstname
+                </th>
+                <th>
+                    lastname
+                </th>
+                <th>
+                    email
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                {props.users.map((user) => <UserListItem user={user} />)}
+            </tbody>
+        </table>
+    );
+}
+
+export default  UserList;
