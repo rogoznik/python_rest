@@ -5,7 +5,7 @@ from users.serializers import UserModelSerializer
 
 
 class ProjectModelSerializer(ModelSerializer):
-    users = StringRelatedField(many=True)
+    # users = StringRelatedField(many=True)
 
     class Meta:
         model = Project
@@ -13,8 +13,8 @@ class ProjectModelSerializer(ModelSerializer):
 
 
 class TodoModelSerializer(ModelSerializer):
-    project = StringRelatedField()
-    author = StringRelatedField()
+    # project = StringRelatedField()
+    # author = StringRelatedField()
 
     class Meta:
         model = Todo
