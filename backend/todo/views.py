@@ -1,8 +1,15 @@
+from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .serializers import UserModelSerializer
-from .models import User
+
+from todo.models import Project, Todo
+from todo.serializers import ProjectModelSerializer, TodoModelSerializer
 
 
-class UserViewSet(ModelViewSet):
-    serializer_class = UserModelSerializer
-    queryset = User.objects.all()
+class ProjectViewSet(ModelViewSet):
+    serializer_class = ProjectModelSerializer
+    queryset = Project.objects.all()
+
+
+class TodoViewSet(ModelViewSet):
+    serializer_class = TodoModelSerializer
+    queryset = Todo.objects.all()
