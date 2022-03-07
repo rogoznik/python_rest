@@ -23,20 +23,20 @@ function UserList(props) {
     return (
         <table>
             <thead>
-            <tr>
-                <th>
-                    username
-                </th>
-                <th>
-                    firstname
-                </th>
-                <th>
-                    lastname
-                </th>
-                <th>
-                    email
-                </th>
-            </tr>
+                <tr>
+                    <th>
+                        username
+                    </th>
+                    <th>
+                        firstname
+                    </th>
+                    <th>
+                        lastname
+                    </th>
+                    <th>
+                        email
+                    </th>
+                </tr>
             </thead>
             <tbody>
                 {props.users.map((user) => <UserListItem user={user} />)}
