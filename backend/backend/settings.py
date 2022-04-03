@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'users',
     'todo',
     'rest_framework.authtoken',
-    'drf_yasg'
+    'drf_yasg',
+    'graphene_django'
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,9 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning'
 }
 
+GRAPHENE = {
+    'SCHEMA': 'backend.schema.schema'
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
