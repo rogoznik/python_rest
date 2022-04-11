@@ -1,12 +1,16 @@
 import React from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import ToDoList from './ToDoList';
+import NewTodoForm from './NewTodoForm';
 
 function Project(props) {
-    let { id } = useParams();
-    let todos = props.todos.filter((todo) => todo.project == id)
+    const { id } = useParams();
+    const todos = props.todos.filter((todo) => todo.project == parseInt(id));
     return(
-        <ToDoList todos={todos} />
+        <div>
+            <NewTodoForm newTodo={props.newTodo} userId={props.userId} projectId={id} />
+            <ToDoList todos={todos} deleteTodo={props.deleteTodo} />
+        </div>
     );
 }
 

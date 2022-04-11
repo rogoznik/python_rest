@@ -39,7 +39,7 @@ function UserList(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.users.map((user) => <UserListItem user={user} />)}
+                {props.users.map((user) => <UserListItem key={user.id} user={user} />)}
             </tbody>
         </table>
     );
