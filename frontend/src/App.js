@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import {BrowserRouter, Route, Link, Routes, Redirect, useLocation} from 'react-router-dom'
+import {BrowserRouter, Route, Routes, useLocation} from 'react-router-dom'
 import axios from 'axios';
 
 import UserList from './components/UserList';
@@ -18,7 +18,7 @@ const NotFound404 = () => {
     let location = useLocation();
     return (
         <div>
-            <h1>Страница по адресу '{location.pathname}' не найдена</h1>
+            <h1>Страница по адресу &apos;{location.pathname}&apos; не найдена</h1>
         </div>
     )
 }
@@ -49,7 +49,7 @@ function App() {
             .then(response => {
                 saveData(response.data);
             })
-            .catch(error => alert('Неверный логин или пароль'));
+            .catch(() => alert('Неверный логин или пароль'));
     }
 
     function isAuthenticated() {
@@ -119,7 +119,7 @@ function App() {
         };
         axios
             .post('http://127.0.0.1:8000/api/projects/', data, {headers})
-            .then(response => {
+            .then(() => {
                 loadData();
             })
             .catch(error => {
@@ -131,7 +131,7 @@ function App() {
         const headers = getHeaders();
         axios
             .post('http://127.0.0.1:8000/api/todos/', data, {headers})
-            .then(response => {
+            .then(() => {
                 loadData();
             })
             .catch(error => {
@@ -143,7 +143,7 @@ function App() {
         const headers = getHeaders();
         axios
             .delete(`http://127.0.0.1:8000/api/todos/${id}`, {headers})
-            .then(response => {
+            .then(() => {
                 // const newTodos = todos.filter((todo) => todo.id != id);
                 // newTodos.push(
                 //     todos.find((todo) => todo.id == id).isActive = false
@@ -160,7 +160,7 @@ function App() {
         const headers = getHeaders();
         axios
             .delete(`http://127.0.0.1:8000/api/projects/${id}`, {headers})
-            .then(response => {
+            .then(() => {
                 // const newProjects = projects.filter((project) => project.id != id);
                 // setProjects(newProjects);
                 // const newTodos = todos.filter((todo) => todo.project != id);
@@ -179,15 +179,10 @@ function App() {
         }
     }, [token]);
 
-    const propsHeader = {
-        'isAuthenticated': () => isAuthenticated(),
-        'logout': () => logout()
-    };
-
     return (
         <div className="App">
                 <BrowserRouter>
-                <Header propsHeader={propsHeader} />
+                <Header isAuthenticated={() => isAuthenticated()} logout={() => logout()}/>
                 <div className='body'>
                     <Routes>
                         <Route exact path='/' element={<MainPage />} />

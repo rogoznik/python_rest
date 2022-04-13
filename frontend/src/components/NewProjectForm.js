@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from "prop-types";
 
 function NewProjectForm(props) {
+    const {newProject, users} = props;
+
     const [nameProject, setName] = useState('');
     const [linkToRepo, setLinkToRepo] = useState('');
     const [usersProject, setUsers] = useState([]);
@@ -27,7 +30,7 @@ function NewProjectForm(props) {
     }
 
     function handleSubmit(event) {
-        props.newProject(nameProject, linkToRepo, usersProject);
+        newProject(nameProject, linkToRepo, usersProject);
         event.preventDefault();
     }
 
@@ -42,12 +45,17 @@ function NewProjectForm(props) {
             <div>
                 <label>Users</label>
                 <select multiple name="users" onChange={(event) => handleUsersChange(event)}>
-                    {props.users.map((user) => <option key={user.id.toString()} value={user.id}>{user.firstName} {user.lastName}</option>)}
+                    {users.map((user) => <option key={user.id.toString()} value={user.id}>{user.firstName} {user.lastName}</option>)}
                 </select>
             </div>
             <input type="submit" value="Create" />
         </form>
     );
 }
+
+NewProjectForm.propTypes = {
+    newProject: PropTypes.func,
+    users: PropTypes.array
+};
 
 export default NewProjectForm;

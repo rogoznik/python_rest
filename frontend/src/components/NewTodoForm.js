@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from "prop-types";
 
 function NewTodo(props) {
+    const {newTodo, projectId, userId} = props;
 
     const [textTodo, setTextTodo] = useState('');
 
@@ -10,11 +12,11 @@ function NewTodo(props) {
 
     function handleSubmit(event) {
         const data = {
-            'project': props.projectId,
-            'author': props.userId,
+            'project': projectId,
+            'author': userId,
             'text': textTodo
         };
-        props.newTodo(data);
+        newTodo(data);
         event.preventDefault();
     }
 
@@ -28,5 +30,11 @@ function NewTodo(props) {
         
     );
 }
+
+NewTodo.propTypes = {
+    newTodo: PropTypes.func,
+    projectId: PropTypes.number,
+    userId: PropTypes.number
+};
 
 export default NewTodo;

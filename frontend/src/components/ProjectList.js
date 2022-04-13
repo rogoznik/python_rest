@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
 
 function ProjectListItem(props) {
+    const {deleteProject, project} = props;
+
     function handleClick() {
-        props.deleteProject(props.project.id);
+        deleteProject(project.id);
     }
 
     return (
         <tr>
             <td>
-                <Link to={`/project/${props.project.id}`}>{props.project.name}</Link>
+                <Link to={`/project/${project.id}`}>{project.name}</Link>
             </td>
             <td>
-                {props.project.linkToRepo}
+                {project.linkToRepo}
             </td>
             <td>
                 <button onClick={() => handleClick()}>Del</button>
@@ -21,11 +24,17 @@ function ProjectListItem(props) {
     );
 }
 
+ProjectListItem.propTypes = {
+    project: PropTypes.object,
+    deleteProject: PropTypes.func
+};
+
 function ProjectList(props) {
-    const [searchProjects, setSearch] = useState(props.projects);
+    const {deleteProject, projects} = props;
+    const [searchProjects, setSearch] = useState(projects);
 
     function handleChange(event) {
-        const newSearchProjects = props.projects.filter((project) => 
+        const newSearchProjects = projects.filter((project) => 
             !event.target.value || 
             (event.target.value && project.name.toLowerCase().includes(event.target.value.toLowerCase()))
         );
@@ -60,12 +69,17 @@ function ProjectList(props) {
                     {searchProjects.map((project) => <ProjectListItem 
                         key={project.id.toString()} 
                         project={project} 
-                        deleteProject={props.deleteProject}
+                        deleteProject={deleteProject}
                         />)}
                 </tbody>
             </table>
         </div>
     );
 }
+
+ProjectList.propTypes = {
+    projects: PropTypes.array,
+    deleteProject: PropTypes.func
+};
 
 export default ProjectList;

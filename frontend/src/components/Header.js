@@ -1,16 +1,20 @@
 import React from 'react';
 import Menu from './Menu';
+import PropTypes from "prop-types";
 
-function Header(props)  {
-    const propsMenu = {
-        'isAuthenticated': () => props.propsHeader.isAuthenticated(),
-        'logout': () => props.propsHeader.logout()
-    };
+function Header(props) {
+    const {isAuthenticated, logout} = props;
+    
     return (
         <div className='header'>
-            <Menu propsMenu={propsMenu} />
+            <Menu isAuthenticated={isAuthenticated} logout={logout} />
         </div>
     )
 }
+
+Header.propTypes = {
+    isAuthenticated: PropTypes.func,
+    logout: PropTypes.func
+};
 
 export default Header;
