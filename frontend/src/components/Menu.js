@@ -1,7 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import PropTypes from "prop-types";
 
-function Menu(props)  {
+function Menu(props) {
+    const {isAuthenticated, logout} = props;
+
     return (
         <div className='menu'>
             <nav>
@@ -19,12 +22,17 @@ function Menu(props)  {
                         <Link to='/todos'>ToDos</Link>
                     </li>
                     <li>
-                        {props.propsMenu.isAuthenticated() ? <button onClick={() => props.propsMenu.logout()}>Logout</button> : <Link to='/login'>SignIn</Link>}
+                        {isAuthenticated() ? <button onClick={() => logout()}>Logout</button> : <Link to='/login'>SignIn</Link>}
                     </li>
                 </ul>
             </nav>
         </div>
     )
 }
+
+Menu.propTypes = {
+    isAuthenticated: PropTypes.func,
+    logout: PropTypes.func
+};
 
 export default Menu;

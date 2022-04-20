@@ -1,25 +1,34 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 function UserListItem(props) {
+    const {user} = props;
+
     return (
         <tr>
             <td>
-                {props.user.username}
+                {user.username}
             </td>
             <td>
-                {props.user.firstName}
+                {user.firstName}
             </td>
             <td>
-                {props.user.lastName}
+                {user.lastName}
             </td>
             <td>
-                {props.user.email}
+                {user.email}
             </td>
         </tr>
     );
 }
 
+UserListItem.propTypes = {
+    user: PropTypes.object
+};
+
 function UserList(props) {
+    const {users} = props;
+
     return (
         <table>
             <thead>
@@ -39,10 +48,14 @@ function UserList(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.users.map((user) => <UserListItem key={user.id} user={user} />)}
+                {users.map((user) => <UserListItem key={user.id} user={user} />)}
             </tbody>
         </table>
     );
 }
+
+UserList.propTypes = {
+    users: PropTypes.array
+};
 
 export default  UserList;

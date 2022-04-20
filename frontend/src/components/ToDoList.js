@@ -1,14 +1,17 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 function ToDoListItem(props) {
+    const {todo, deleteTodo} = props;
+
     let isActive = 'True';
-    if (props.todo.isActive != 1) {
+    if (todo.isActive != 1) {
         isActive = 'False';
     }
 
     function handleClick() {
-        if (props.todo.isActive) {
-            props.deleteTodo(props.todo.id);
+        if (todo.isActive) {
+            deleteTodo(todo.id);
         }
     }
 
@@ -36,7 +39,14 @@ function ToDoListItem(props) {
     );
 }
 
+ToDoListItem.propTypes = {
+    todo: PropTypes.object,
+    deleteTodo: PropTypes.func
+};
+
 function ToDoList(props) {
+    const {todos, deleteTodo} = props;
+
     return (
         <table>
             <thead>
@@ -62,10 +72,15 @@ function ToDoList(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.todos.map((todo) => <ToDoListItem key={todo.id.toString()} todo={todo} deleteTodo={props.deleteTodo} />)}
+                {todos.map((todo) => <ToDoListItem key={todo.id.toString()} todo={todo} deleteTodo={deleteTodo} />)}
             </tbody>
         </table>
     );
 }
+
+ToDoList.propTypes = {
+    todos: PropTypes.arrya,
+    deleteTodo: PropTypes.func
+};
 
 export default ToDoList;
