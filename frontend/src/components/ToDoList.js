@@ -5,6 +5,13 @@ function ToDoListItem(props) {
     if (props.todo.isActive != 1) {
         isActive = 'False';
     }
+
+    function handleClick() {
+        if (props.todo.isActive) {
+            props.deleteTodo(props.todo.id);
+        }
+    }
+
     return (
         <tr>
             <td>
@@ -22,12 +29,15 @@ function ToDoListItem(props) {
             <td>
                 {isActive}
             </td>
+            <td>
+                <button onClick={() => handleClick()}>Del</button>
+            </td>
         </tr>
     );
 }
 
 function ToDoList(props) {
-    return(
+    return (
         <table>
             <thead>
                 <tr>
@@ -46,10 +56,13 @@ function ToDoList(props) {
                     <th>
                         isActive
                     </th>
+                    <th>
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                {props.todos.map((todo) => <ToDoListItem todo={todo} />)}
+                {props.todos.map((todo) => <ToDoListItem key={todo.id.toString()} todo={todo} deleteTodo={props.deleteTodo} />)}
             </tbody>
         </table>
     );
